@@ -294,6 +294,19 @@ $(function () {
                    });
                   </script>
                 </div>
+                <div class="span4" style="text-align: center;">
+                  <label>
+                    Getting value:
+                  </label>
+                  <input type="date" class="s-calendar calendar-getting-value">
+                  <script>
+                   $(function () {
+                    $('input.calendar-getting-value').datepicker().on('change', function (event) { 
+                      alert($(event.currentTarget).val()); 
+                    });
+                   });
+                  </script>
+                </div>
               </div>
             </div>
           </div>
