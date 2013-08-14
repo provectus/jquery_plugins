@@ -196,7 +196,7 @@ $(function () {
                       var $textinput = $('.dynamic-select__new-item');
                       var text = $textinput.val();
                       if (text !== '') {
-                        $('<option></option>').text(text).appendTo('.select-dynamic');
+                        $('<option></option>').text(text).appendTo('select.select-dynamic');
                         $textinput.val('');
                       }
                     });
