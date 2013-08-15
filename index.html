@@ -65,7 +65,7 @@ $(function () {
   //append item
   $('select.class-to-find').append('&lt;option&gt;Value&lt;/option&gt;');
   //remove element
-  $('select.class-to-find').find('.select-of-option').remove()
+  $('select.class-to-find').find('<i>&lt;selector-of-option&gt;</i>').remove()
   //getting value
   $('select.class-to-find').val();
   //setting value
@@ -218,7 +218,12 @@ $(function () {
 &lt;input type="date" class="s-calendar class-to-find" /&gt;</pre>
           <pre title="javascript" class="prettyprint">
 $(function () {
+  //initialize
   $('input.class-to-find').datepicker(options);
+  //getting value
+  $('input.class-to-find').val();
+  //setting value
+  $('input.class-to-find').val('YYYY-MM-DD');
 });</pre>
           <h6>Options:</h6>
           <pre class="prettyprint">
