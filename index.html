@@ -25,12 +25,11 @@
           <div class="navbar-inner">
             <div class="container">
               <ul class="nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="#selects">Selects</a></li>
-                <li><a href="#datetime">Datepicker</a></li>
-                <li><a href="#">Tags</a></li>
-                <li><a href="#">Autocomplete</a></li>
-                <li><a href="#">Mutations</a></li>
+                <li><a class="js-menu-item" href="/">Home</a></li>
+                <li><a class="js-menu-item" href="#selects">Selects</a></li>
+                <li><a class="js-menu-item" href="#datetime">Datepicker</a></li>
+                <li><a class="js-menu-item" href="#tags">Tags</a></li>
+                <li><a class="js-menu-item" href="#mutations">Mutations</a></li>
               </ul>
             </div>
           </div>
@@ -44,7 +43,7 @@
       <div class="row-fluid">
         <div class="well white">
           <h4>Selects</h4>
-          <a name="#selects"></a>
+          <a name="selects"></a>
           <h6>Description:</h6>
           <div class="well">
             Plugin replaces default selects with more beautiful analogues. It monitors changes in original element and applies them on itself.
@@ -207,8 +206,8 @@ $(function () {
           </div>
         </div>
         <div class="well white">
+          <a name="datetime"></a>
           <h4>Datepicker</h4>
-          <a name="date"></a>
           <h6>Description:</h6>
           <div class="well">
             Plugin draws pretty calendar for choosing date.
@@ -342,7 +341,7 @@ $(function () {
         </div>
         <div class="well white">
           <h4>Tags</h4>
-          <a name="date"></a>
+          <a name="tags"></a>
           <h6>Description:</h6>
           <div class="well">
             Plugin for multiple select with autocomplete
@@ -361,13 +360,13 @@ $(function () {
 });</pre>
         <h6>Options:</h6>
         <pre class="prettyprint">{
-  tags: ['tag1', 'tag2'], // default selected tags
-  tips: ['tag1', 'tag2'], // default not selected tags
-  withId: true/false, // if true tags must be hash {id: string|int, name: string}
-  withDropdown: true/false, // if true then control will be with dropdown where user can select tag
-  withNew: true/flase, // if true then user can create new tag
-  callback: function, // callback on keyup event, it has one arg - text in control and must return array of tips
-  async: true/false, // if true then callback function is asynchronous and must return jQuery.Deferred object
+  tags: ['tag1', 'tag2'], // default selected tags <i>default: []</i>
+  tips: ['tag1', 'tag2'], // default not selected tags <i>default: []</i>
+  withId: true/false, // if true tags must be hash {id: string|int, name: string} <i>default: false</i>
+  withDropdown: true/false, // if true then control will be with dropdown where user can select tag <i>default: false</i>
+  withNew: true/flase, // if true then user can create new tag <i>default: false</i>
+  callback: function, // callback on keyup event, it has one arg - text in control and must return array of tips <i>default: null</i>
+  async: true/false, // if true then callback function is asynchronous and must return jQuery.Deferred object <i>default: false</i>
 }</pre>
         <h6>Demo:</h6>
           <div class="well">
@@ -467,6 +466,28 @@ $(function () {
             </div>
           </div>
         </div>
+        <div class="well white">
+          <h4>Mutations</h4>
+          <a name="mutations"></a>
+          <h6>Description:</h6>
+          <div class="well">
+            Plugin for handling of DOM changes. It uses default MutationObserver or outdated events (DOMNodeInserted, DOMNodeRemoved, DOMAttrModified)
+          </div>
+          <h6>Usage:</h6>
+          <pre class="prettyprint" title="javascript">
+// initialize
+$('selector-of-element').mutations(options)
+// event handling
+$('selector-of-element').on('child_added|child_removed|attributes_changed')</pre>
+          <h6>Options:</h6>
+          <pre class="prettyprint">
+{
+  children: true/false, // track changes of children (add or remove) <i>default: false</i>
+  attributes: true/false, // track changes of attributes <i>default: false</i>
+  subtree: true/false, // if true then changes will be tracked for children and  children of children and so on <i>default: false</i>
+  filter: [] // attributes filter <i>default: []</i>
+}</pre>
+        </div>
       </div>
       <hr>
       <div class="footer">
@@ -478,9 +499,16 @@ $(function () {
     <script src="js/selects.jquery.min.js"></script>
     <script src="js/datepicker.jquery.min.js"></script>
     <script src="js/tags.jquery.min.js"></script>
-    <script>
+    <script type="text/javascript">
       $(function () {
         window.prettyPrint && prettyPrint();
+        $(document).on('click', '.js-menu-item', function (event) {
+          var $target = $(event.currentTarget),
+              name = $target.attr('href').replace('#', ''),
+              $anchor = $('a[name="'+name+'"]');
+          $('body').animate({scrollTop: $anchor.offset().top}, 'fast');
+          return false;
+        });
       });
     </script>
   </body>
