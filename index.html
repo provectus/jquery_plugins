@@ -14,6 +14,7 @@
     <link href="css/prettify.css" rel="stylesheet">
     <link href="css/selects.jquery.min.css" rel="stylesheet">
     <link href="css/datepicker.jquery.min.css" rel="stylesheet">
+    <link href="css/tags.jquery.min.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
   </head>
@@ -27,7 +28,6 @@
                 <li class="active"><a href="/">Home</a></li>
                 <li><a href="#selects">Selects</a></li>
                 <li><a href="#datetime">Datepicker</a></li>
-                <li><a href="#datetime">Timepicker</a></li>
                 <li><a href="#">Tags</a></li>
                 <li><a href="#">Autocomplete</a></li>
                 <li><a href="#">Mutations</a></li>
@@ -215,7 +215,7 @@ $(function () {
           </div>
           <h6>Usage:</h6>
           <pre title="html" class="prettyprint">
-&lt;input type="date" class="s-calendar class-to-find" /&gt;</pre>
+&lt;input type="text" class="s-calendar class-to-find" /&gt;</pre>
           <pre title="javascript" class="prettyprint">
 $(function () {
   //initialize
@@ -224,6 +224,8 @@ $(function () {
   $('input.class-to-find').val();
   //setting value
   $('input.class-to-find').val('YYYY-MM-DD');
+  //with timepicker
+  $('input.class-to-find').datetimepicker()
 });</pre>
           <h6>Options:</h6>
           <pre class="prettyprint">
@@ -240,7 +242,7 @@ $(function () {
                   <label>
                     Default:
                   </label>
-                  <input type="date" class="s-calendar simple-calendar">
+                  <input type="text" class="s-calendar simple-calendar">
                   <script>
                    $(function () {
                     $('input.simple-calendar').datepicker();
@@ -251,7 +253,7 @@ $(function () {
                   <label>
                     Past access = false:
                   </label>
-                  <input type="date" class="s-calendar calendar-without-past">
+                  <input type="text" class="s-calendar calendar-without-past">
                   <script>
                    $(function () {
                     $('input.calendar-without-past').datepicker({
@@ -264,7 +266,7 @@ $(function () {
                   <label>
                     Week starts from monday:
                   </label>
-                  <input type="date" class="s-calendar calendar-monday">
+                  <input type="text" class="s-calendar calendar-monday">
                   <script>
                    $(function () {
                     $('input.calendar-monday').datepicker({
@@ -279,7 +281,7 @@ $(function () {
                   <label>
                     Default day (New Year):
                   </label>
-                  <input type="date" class="s-calendar calendar-new-year">
+                  <input type="text" class="s-calendar calendar-new-year">
                   <script>
                    $(function () {
                     $('input.calendar-new-year').datepicker({
@@ -292,7 +294,7 @@ $(function () {
                   <label>
                     Disabled:
                   </label>
-                  <input type="date" class="s-calendar calendar-disabled" disabled="disabled">
+                  <input type="text" class="s-calendar calendar-disabled" disabled="disabled">
                   <script>
                    $(function () {
                     $('input.calendar-disabled').datepicker();
@@ -303,13 +305,162 @@ $(function () {
                   <label>
                     Getting value:
                   </label>
-                  <input type="date" class="s-calendar calendar-getting-value">
+                  <input type="text" class="s-calendar calendar-getting-value">
                   <script>
                    $(function () {
                     $('input.calendar-getting-value').datepicker().on('change', function (event) { 
                       alert($(event.currentTarget).val()); 
                     });
                    });
+                  </script>
+                </div>
+              </div>
+              <div class="row-fluid" style="margin-top: 10px;">
+                <div class="span6" style="text-align: center;">
+                  <label>Time value</label>
+                  <input type="text" class="s-calendar calendar-time">
+                  <script>
+                    $(function () {
+                      $('input.calendar-time').datetimepicker();
+                    });
+                  </script>
+                </div>
+                <div class="span6" style="text-align: center;">
+                  <label>With time</label>
+                  <input type="text" class="s-calendar calendar-time-value">
+                  <script>
+                    $(function () {
+                      $('input.calendar-time-value').datetimepicker().on('change', function (event) { 
+                        alert($(event.currentTarget).val()); 
+                      });
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="well white">
+          <h4>Tags</h4>
+          <a name="date"></a>
+          <h6>Description:</h6>
+          <div class="well">
+            Plugin for multiple select with autocomplete
+          </div>
+          <h6>Usage:</h6>
+          <pre title="html" class="prettyprint">
+&ltinput type="text" class="s-tags class-to-find" /&gt</pre>
+          <pre title="javascript" class="prettyprint">
+$(function () {
+  // intitalize
+  $('input.class-to-find').tags(options);
+  // getting value (it returns array)
+  $('input.class-to-find').val();
+  // setting value
+  $('input.class-to-find').val(['tags1', 'tags2', 'tags3']);
+});</pre>
+        <h6>Options:</h6>
+        <pre class="prettyprint">{
+  tags: ['tag1', 'tag2'], // default selected tags
+  tips: ['tag1', 'tag2'], // default not selected tags
+  withId: true/false, // if true tags must be hash {id: string|int, name: string}
+  withDropdown: true/false, // if true then control will be with dropdown where user can select tag
+  withNew: true/flase, // if true then user can create new tag
+  callback: function, // callback on keyup event, it has one arg - text in control and must return array of tips
+  async: true/false, // if true then callback function is asynchronous and must return jQuery.Deferred object
+}</pre>
+        <h6>Demo:</h6>
+          <div class="well">
+            <div class="container-fluid">
+              <div class="row-fluid">
+                <div class="span3">
+                  Default tags and tips:
+                </div>
+                <div class="span4">
+                  <input type="text" class="s-tags tags-default" />
+                  <script>
+                    $(function () {
+                      $('input.tags-default').tags({
+                        tags: ['Earth', 'Mars'],
+                        tips: ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+                      })
+                    });
+                  </script>
+                </div>
+              </div>
+              <div class="row-fluid">
+                <div class="span3">
+                  Disabled:
+                </div>
+                <div class="span4">
+                  <input type="text" class="s-tags tags-disabled" disabled="disabled" />
+                  <script>
+                    $(function () {
+                      $('input.tags-disabled').tags({
+                        tags: ['Earth', 'Mars'],
+                        tips: ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+                      })
+                    });
+                  </script>
+                </div>
+              </div>
+              <div class="row-fluid">
+                <div class="span3">
+                  With new:
+                </div>
+                <div class="span4">
+                  <input type="text" class="s-tags tags-new" />
+                  <script>
+                    $(function () {
+                      $('input.tags-new').tags({
+                        tags: ['Earth', 'Mars'],
+                        tips: ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'],
+                        withNew: true
+                      })
+                    });
+                  </script>
+                </div>
+              </div>
+              <div class="row-fluid">
+                <div class="span3">
+                  With dropdown:
+                </div>
+                <div class="span4">
+                  <input type="text" class="s-tags tags-dropdown" />
+                  <script>
+                    $(function () {
+                      $('input.tags-dropdown').tags({
+                        tags: ['Earth', 'Mars'],
+                        tips: ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'],
+                        withDropdown: true
+                      })
+                    });
+                  </script>
+                </div>
+              </div>
+              <div class="row-fluid">
+                <div class="span3">
+                  Dynamic tips:
+                </div>
+                <div class="span4">
+                  <input type="text" class="s-tags tags-dynamic" />
+                  <script>
+                    $(function () {
+                      $('input.tags-dynamic').tags({
+                        tags: ['Earth', 'Mars'],
+                        callback: function (text) {
+                          var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                          var results = [];
+                          for (var j = 0; j < 10; j++) {
+                            var _text = text;
+                            for( var i=0; i < 5; i++ )
+                              _text += possible.charAt(Math.floor(Math.random() * possible.length));
+                            results.push(_text);
+                          }
+                          return results;
+                        }
+                      });
+                    });
                   </script>
                 </div>
               </div>
@@ -326,6 +477,7 @@ $(function () {
     <script src="js/prettify.js"></script>
     <script src="js/selects.jquery.min.js"></script>
     <script src="js/datepicker.jquery.min.js"></script>
+    <script src="js/tags.jquery.min.js"></script>
     <script>
       $(function () {
         window.prettyPrint && prettyPrint();
