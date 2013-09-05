@@ -1,0 +1,190 @@
+@import "compass";
+@import "compass/css3";
+@import "compass/utilities";
+@import "compass/css3/user-interface";
+
+.s-calendar {
+  display: inline-block;
+  letter-spacing: normal;
+  white-space: nowrap;
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  
+  .s-calendar__container {
+    background-color: #2e2e31;
+    border: 1px solid #2e2e31;
+    display: inline-block;
+    overflow: hidden;
+    @include border-radius(3px);
+    @include box-shadow(0 -1px #333, inset 0 1px rgba(255,255,255,.08));
+    vertical-align: top;
+    z-index: 2;
+    position: relative;
+  }
+
+  .s-calendar__header {
+    line-height: 33px;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+  }
+
+  .s-calendar__btn {
+    position: absolute;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    opacity: 0.75;
+    border: none;
+    background-color: transparent;
+
+    &.prev {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QQCBw0hwXWzjAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAABSSURBVDjLY/z//z8DNQETA5XBqIFD0MB6kk38//8/Llz/HwIYSMG4JBr+IwDFBjb+Jw2g6McWhn8pihUC4Ue1MCQ7UljwOL6RHB8zjhZfg89AADLWRmYVDMp9AAAAAElFTkSuQmCC);
+      left: 5px;
+    }
+
+    &.next {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QQCBw4ZwlpY0QAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAABOSURBVDjL7dRBCoAwDETR1ounXtznAcRibRYi/ZDVwF/MQCpKJltJZgl/IoxuitGDdpe/FcL+VDjCRTo7ypHVIURmh5E5Suvldb2v7wlPZYWCKK5IdM0AAAAASUVORK5CYII=);
+      right: 5px;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .s-calendar__table {
+    max-width: 100%;
+    background-color: transparent;
+    border-spacing: 0;
+
+    th, td {
+      width: 30px;
+      text-align: center;
+      color: #666;
+      @include text-shadow(0 1px #fff);
+      @include user-select(none);
+    }
+
+    th {
+      background: #f3f3f3;
+      height: 20px;
+      line-height: 20px;
+      font-size: 9px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #c6c6c6;
+    }
+
+    td {
+      cursor: pointer;
+      background-color: #f3f3f3;
+      height: 30px;
+      font-size: 12px;
+      line-height: 30px;
+      border: 1px solid #c6c6c6;
+      @include box-shadow(inset 1px 1px 0px rgba(255,255,255,.5));
+      @include background-image(linear-gradient(bottom, #f3f3f3, #fff));
+      opacity: 0.95;
+
+      &.other-month {
+        background: #e1e1e1;
+        color: #b3b3b3;
+        @include background-image(linear-gradient(bottom, #e1e1e1, #eaeaea));
+      }
+
+      &.active {
+        opacity: 1;
+        @include background-image(linear-gradient(top, #ddd, #eaeaea));
+      }
+
+      &.current {
+        background: #496cb0;
+        color: #fff;
+        font-weight: bold;
+        @include box-shadow(inset 0px 0px 4px rgba(0,0,0,.1));
+        @include text-shadow(0 1px #213b6e);
+      }
+
+    }
+
+    tr td:first-child {
+      border-left: none;
+    }
+
+    tr td:last-child {
+      border-right: none;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.4;
+  }
+
+  .s-calendar__time {
+    border: 1px solid #2e2e31;
+    padding: 2px 5px 5px 7px;
+    margin-top: -1px;
+    @include border-radius(0 3px 3px 0);
+    background: #f3f3f3;
+    display: inline-block;
+    vertical-align: top;
+    z-index: 1;
+    height: 233px;
+    margin-left: -6px;
+    line-height: normal;
+  }
+
+  .s-calendar__title {
+    font-size: 9px;
+    padding: 3px 0 1px;
+  }
+
+  .s-calendar__row {
+    padding: 2px 0 1px;
+    white-space: normal;
+    text-align: left;
+
+    button {
+      width: 32px;
+      height: 25px;
+      border: 1px solid #c6c6c6;
+      border-radius: 3px;
+      @include box-shadow(inset 1px 1px 0px rgba(255,255,255,.5));
+      @include background-image(linear-gradient(bottom, #f3f3f3, #fff));
+
+      &.active {
+        background-color: #526ba5;
+        border: solid 1px #4065b0;
+        color: #fff;
+        @include background-image(linear-gradient(bottom, #526ba5, #6589d1));
+        @include box-shadow(inset 0 0 0 2px rgba(195,222,255,.11));
+        @include text-shadow(0 -1px #2a437b);
+      }
+
+      &.s-calendar__close {
+        width: 100%;
+        background-color: #2c2c2c;
+        border: solid 1px #4c4c4c;
+        color: #fff;
+        @include background-image(linear-gradient(bottom, #2c2c2c, #5e5e5e));
+        @include box-shadow(inset 0 0 0 2px rgba(184,184,184,.11));
+        @include text-shadow(0 -1px #272727);
+
+        &:hover { @include background-image(linear-gradient(bottom, #2c2c2c, #6b6b6b)); }
+      }
+    }
+  }
+
+
+
+  .s-calendar__hr {
+    border: 1px dotted #dddddd;
+    margin-bottom: 2px;
+    margin-top: 3px;
+  }
+}
